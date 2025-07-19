@@ -3,9 +3,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { useCounterStore } from './store'
 
-// ✅ This component updates and displays `counter2`.
-// Since it only subscribes to `counter2` and `incrementCounter2`, 
-// it will re-render only when those specific parts of the state change.
+// ✅ This component efficiently subscribes only to the specific parts of the state it needs.
+// By selecting only `counter2` and `incrementCounter2`, it avoids unnecessary re-renders.
 const OtherComponent = () =>{
   const counter2 = useCounterStore((state) => state.counter2);
   const incrementCounter2 = useCounterStore((state) => state.incrementCounter2);
@@ -16,13 +15,11 @@ const OtherComponent = () =>{
   )
 }
 
-// ✅ Efficient usage: This component only selects the state it actually needs.
-// Changes to `counter2` will not trigger a re-render here,
-// since `count`, `increment`, and `incrementAsync` are the only selected values.
+// ⚠️ Not ideal: This component subscribes to the entire store state,
+// causing it to re-render even when unrelated parts of the state change.
+// A better approach would be to select only `count`, `increment`, and `incrementAsync`.
 function App() {
-  const count = useCounterStore((state) => state.count);
-  const increment = useCounterStore((state) => state.increment);
-  const incrementAsync = useCounterStore((state) => state.incrementAsync);
+  const state = useCounterStore();
   return (
     <>
       <div>
@@ -35,12 +32,12 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => increment()}>
-          count is {count}
+        <button onClick={() => state.increment()}>
+          count is {state.count}
         </button>
 
-         <button onClick={() => incrementAsync()}>
-          Increment Async: count is {count}
+         <button onClick={() => state.incrementAsync()}>
+          Increment Async: count is {state.count}
         </button>
 
         <OtherComponent/>
