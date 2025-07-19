@@ -1,12 +1,6 @@
-# React + Vite
+# Zustand
+## Why Zustand?
+Using useState in small apps is fine, but as your app grows, this approach becomes problematic since you'll need to pass data through props across many components.
+This issue can be addressed with React Context. However, the downside of using Context is that you have to wrap your entire application (or a subset of it) in a provider, and any updates to the context can trigger unnecessary re-renders throughout the app and it's not efficient at all. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Zustand allows you to manage state across your entire application more effectively. Specifically, it lets you create global state that doesn't need to be defined within a component
